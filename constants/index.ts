@@ -1,10 +1,10 @@
 export const SITE_CONFIG = {
-  name: "EğitimMağaza",
+  name: "Metrik Rehber",
   tagline: "Premium Eğitim Kursları",
   description:
     "Sektör uzmanları tarafından tasarlanan kapsamlı online kurslarımızla öğrenme yolculuğunuzu dönüştürün. Kendi hızınızda öğrenin ve hedeflerinize ulaşın.",
   phone: "0 533 236 20 05",
-  email: "info@egitimmagaza.com",
+  email: "info@metrikrehber.com",
 } as const
 
 export const NAVIGATION_ITEMS = [

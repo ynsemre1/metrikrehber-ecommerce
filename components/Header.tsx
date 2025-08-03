@@ -1,13 +1,21 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Menu, X, Phone, Mail, Instagram, Youtube, Facebook } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { SITE_CONFIG, NAVIGATION_ITEMS } from "@/constants"
-import Link from "next/link"
+import { useState } from "react";
+import {
+  Menu,
+  X,
+  Phone,
+  Mail,
+  Instagram,
+  Youtube,
+  Facebook,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { SITE_CONFIG, NAVIGATION_ITEMS } from "@/constants";
+import Link from "next/link";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <>
@@ -39,11 +47,17 @@ export default function Header() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
-                <span className="text-white font-bold text-lg">E</span>
+              <div className="w-10 h-10 mr-3">
+                <img
+                  src="/logo.png"
+                  alt="Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">{SITE_CONFIG.name}</h1>
+                <h1 className="text-xl font-bold text-gray-900">
+                  {SITE_CONFIG.name}
+                </h1>
                 <p className="text-xs text-gray-500">{SITE_CONFIG.tagline}</p>
               </div>
             </Link>
@@ -71,8 +85,17 @@ export default function Header() {
 
             {/* Mobile menu button */}
             <div className="lg:hidden">
-              <Button variant="ghost" size="sm" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
               </Button>
             </div>
           </div>
@@ -103,5 +126,5 @@ export default function Header() {
         </div>
       </header>
     </>
-  )
+  );
 }
