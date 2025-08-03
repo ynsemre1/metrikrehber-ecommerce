@@ -6,9 +6,9 @@ export default function VideoSection() {
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">See How It Works</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Nasıl Çalıştığını Görün</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Watch our platform in action and discover how easy it is to start your learning journey
+            Platformumuzu çalışırken izleyin ve öğrenme yolculuğunuza başlamanın ne kadar kolay olduğunu keşfedin
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export default function VideoSection() {
           {/* Video Description */}
           <div className="text-center mt-8">
             <p className="text-gray-600">
-              Get a complete overview of our platform features and learning experience in just 2 minutes
+              Platform özelliklerimiz ve öğrenme deneyimimiz hakkında sadece 2 dakikada tam bir genel bakış edinin
             </p>
           </div>
         </div>

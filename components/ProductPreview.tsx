@@ -14,9 +14,9 @@ export default function ProductPreview() {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Featured Course Packages</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Öne Çıkan Kurs Paketleri</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover our most popular course packages designed to help you achieve academic success
+            Akademik başarınıza ulaşmanıza yardımcı olmak için tasarlanmış en popüler kurs paketlerimizi keşfedin
           </p>
         </div>
 
@@ -75,7 +75,7 @@ export default function ProductPreview() {
                     </span>
                   </div>
 
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">View Details</Button>
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700">Detayları Görüntüle</Button>
                 </div>
               </div>
             </div>
@@ -86,7 +86,7 @@ export default function ProductPreview() {
         <div className="text-center">
           <Link href="/products">
             <Button size="lg" variant="outline" className="text-lg px-8 py-3 bg-transparent">
-              See All Products
+              Tüm Ürünleri Gör
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>

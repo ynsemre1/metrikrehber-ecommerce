@@ -36,9 +36,9 @@ export default function Testimonials() {
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Öğrencilerimiz Ne Diyor</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Join thousands of successful learners who have transformed their academic journey with our platform
+            Platformumuzla akademik yolculuklarını dönüştüren binlerce başarılı öğrenciye katılın
           </p>
         </div>
 
@@ -50,7 +50,7 @@ export default function Testimonials() {
 
         {/* Trust Indicators */}
         <div className="mt-16 text-center">
-          <p className="text-gray-600 mb-8">Trusted by students from top universities</p>
+          <p className="text-gray-600 mb-8">En iyi üniversitelerden öğrenciler tarafından güveniliyor</p>
           <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
             {["Boğaziçi", "İTÜ", "ODTÜ", "Hacettepe", "Bilkent"].map((university) => (
               <div key={university} className="text-2xl font-bold text-gray-400">

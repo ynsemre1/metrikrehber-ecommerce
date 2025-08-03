@@ -9,7 +9,7 @@ export default function ProductFilters() {
   return (
     <div className="bg-white border-b">
       <div className="container mx-auto px-4 py-6">
-        <h1 className="text-3xl font-bold text-blue-600 mb-6">Our Packages</h1>
+        <h1 className="text-3xl font-bold text-blue-600 mb-6">Paketlerimiz</h1>
 
         <div className="flex flex-wrap gap-2">
           {PRODUCT_CATEGORIES.map((category) => (

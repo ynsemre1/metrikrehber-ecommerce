@@ -64,9 +64,9 @@ export default function Header() {
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center space-x-4">
               <Button variant="ghost" size="sm">
-                Sign In
+                Giriş Yap
               </Button>
-              <Button size="sm">Get Started</Button>
+              <Button size="sm">Başlayın</Button>
             </div>
 
             {/* Mobile menu button */}
@@ -93,9 +93,9 @@ export default function Header() {
                 ))}
                 <div className="px-4 pt-4 space-y-2">
                   <Button variant="ghost" className="w-full justify-start">
-                    Sign In
+                    Giriş Yap
                   </Button>
-                  <Button className="w-full">Get Started</Button>
+                  <Button className="w-full">Başlayın</Button>
                 </div>
               </div>
             </div>

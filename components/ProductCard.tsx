@@ -109,7 +109,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <span>{product.advancePayment}</span>
           </div>
 
-          <Button className="w-full bg-blue-600 hover:bg-blue-700">Add to Cart</Button>
+          <Button className="w-full bg-blue-600 hover:bg-blue-700">Sepete Ekle</Button>
         </div>
       </div>
     </div>

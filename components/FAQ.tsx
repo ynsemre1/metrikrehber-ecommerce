@@ -52,9 +52,9 @@ export default function FAQ() {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Sıkça Sorulan Sorular</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Find answers to common questions about our platform and courses
+            Platformumuz ve kurslarımız hakkında sık sorulan soruların cevaplarını bulun
           </p>
         </div>
 
@@ -65,9 +65,9 @@ export default function FAQ() {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-gray-600 mb-4">Still have questions?</p>
+          <p className="text-gray-600 mb-4">Hala sorularınız mı var?</p>
           <a href="#contact" className="text-primary hover:text-primary/80 font-semibold underline underline-offset-4">
-            Contact our support team
+            Destek ekibimizle iletişime geçin
           </a>
         </div>
       </div>
