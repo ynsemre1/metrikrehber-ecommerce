@@ -16,7 +16,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "EğitimMağaza - Premium Eğitim Kursları",
+  title: "Metrik Rehber - Premium Eğitim Kursları",
   description: "Sektör uzmanları tarafından tasarlanan kapsamlı online kurslarımızla öğrenme yolculuğunuzu dönüştürün.",
     generator: 'v0.dev'
 }

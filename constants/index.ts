@@ -1,11 +1,11 @@
 export const SITE_CONFIG = {
-  name: "Mehrik Rehber",
+  name: "Metrik Rehber",
   tagline: "Premium Tabletli Eğitim Kursları",
   description:
     "Sektör uzmanları tarafından tasarlanan kapsamlı online kurslarımızla öğrenme yolculuğunuzu dönüştürün. Kendi hızınızda öğrenin ve hedeflerinize ulaşın.",
   phone: "0 533 236 20 05",
   email: "info@metrikrehber.com",
-} as const
+} as const;
 
 export const NAVIGATION_ITEMS = [
   { label: "Ana Sayfa", href: "/" },
@@ -14,7 +14,7 @@ export const NAVIGATION_ITEMS = [
   { label: "Yorumlar & Başarılarımız", href: "#reviews" },
   { label: "Yardım", href: "#help" },
   { label: "İletişim", href: "#contact" },
-] as const
+] as const;
 
 export const HERO_CONTENT = {
   headline: "Uzman Eğitmenlerle Sınavlarınızda Başarıya Ulaşın",
@@ -22,7 +22,7 @@ export const HERO_CONTENT = {
     "Kapsamlı online eğitim platformumuz aracılığıyla akademik hedeflerine ulaşan binlerce başarılı öğrenciye katıl. Başarı yolculuğuna bugün başla.",
   ctaText: "Kursları Keşfet",
   ctaSecondary: "Demo İzle",
-} as const
+} as const;
 
 export const PRODUCT_CATEGORIES = [
   { id: "yks-2026", label: "YKS 2026", active: true },
@@ -33,7 +33,7 @@ export const PRODUCT_CATEGORIES = [
   { id: "grade-1-4", label: "1, 2, 3, 4. Sınıf", active: false },
   { id: "kpss-pre", label: "KPSS Ön Lisans", active: false },
   { id: "kpss-license", label: "KPSS Lisans", active: false },
-] as const
+] as const;
 
 export const PRODUCTS = [
   {
@@ -51,15 +51,28 @@ export const PRODUCTS = [
     },
     features: {
       title: "Özellikler",
-      items: ["Deneme Sınavları & Soru Bankası", "Gelişmiş Kişisel Gelişim Sistemi", "Uzman Eğitimleri"],
+      items: [
+        "Deneme Sınavları & Soru Bankası",
+        "Gelişmiş Kişisel Gelişim Sistemi",
+        "Uzman Eğitimleri",
+      ],
     },
     additionalFeatures: {
       title: "Ek Özellikler",
       items: [
-        { name: "Soru Sorma Hakkı", details: ["1ci Yıl", "2nci Yıl", "Ekstra Paket"] },
-        { name: "Randevulu Küçük Grup Görüşmeleri", details: ["2nci Yıl", "Ekstra Paket"] },
+        {
+          name: "Soru Sorma Hakkı",
+          details: ["1ci Yıl", "2nci Yıl", "Ekstra Paket"],
+        },
+        {
+          name: "Randevulu Küçük Grup Görüşmeleri",
+          details: ["2nci Yıl", "Ekstra Paket"],
+        },
         { name: "Özel Dersler", details: ["2nci Yıl", "Ekstra Paket"] },
-        { name: "Randevulu 40 Dakikalık Özel Dersler", details: ["Ekstra Paket"] },
+        {
+          name: "Randevulu 40 Dakikalık Özel Dersler",
+          details: ["Ekstra Paket"],
+        },
       ],
     },
   },
@@ -78,15 +91,28 @@ export const PRODUCTS = [
     },
     features: {
       title: "Özellikler",
-      items: ["Deneme Sınavları & Soru Bankası", "Gelişmiş Kişisel Gelişim Sistemi", "Uzman Eğitimleri"],
+      items: [
+        "Deneme Sınavları & Soru Bankası",
+        "Gelişmiş Kişisel Gelişim Sistemi",
+        "Uzman Eğitimleri",
+      ],
     },
     additionalFeatures: {
       title: "Ek Özellikler",
       items: [
-        { name: "Soru Sorma Hakkı", details: ["1ci Yıl", "2nci Yıl", "Ekstra Paket"] },
-        { name: "Randevulu Küçük Grup Görüşmeleri", details: ["2nci Yıl", "Ekstra Paket"] },
+        {
+          name: "Soru Sorma Hakkı",
+          details: ["1ci Yıl", "2nci Yıl", "Ekstra Paket"],
+        },
+        {
+          name: "Randevulu Küçük Grup Görüşmeleri",
+          details: ["2nci Yıl", "Ekstra Paket"],
+        },
         { name: "Özel Dersler", details: ["2nci Yıl", "Ekstra Paket"] },
-        { name: "Randevulu 40 Dakikalık Özel Dersler", details: ["Ekstra Paket"] },
+        {
+          name: "Randevulu 40 Dakikalık Özel Dersler",
+          details: ["Ekstra Paket"],
+        },
       ],
     },
   },
@@ -105,15 +131,28 @@ export const PRODUCTS = [
     },
     features: {
       title: "Özellikler",
-      items: ["Deneme Sınavları & Soru Bankası", "Gelişmiş Kişisel Gelişim Sistemi", "Uzman Eğitimleri"],
+      items: [
+        "Deneme Sınavları & Soru Bankası",
+        "Gelişmiş Kişisel Gelişim Sistemi",
+        "Uzman Eğitimleri",
+      ],
     },
     additionalFeatures: {
       title: "Ek Özellikler",
       items: [
-        { name: "Soru Sorma Hakkı", details: ["1ci Yıl", "2nci Yıl", "Ekstra Paket"] },
-        { name: "Randevulu Küçük Grup Görüşmeleri", details: ["2nci Yıl", "Ekstra Paket"] },
+        {
+          name: "Soru Sorma Hakkı",
+          details: ["1ci Yıl", "2nci Yıl", "Ekstra Paket"],
+        },
+        {
+          name: "Randevulu Küçük Grup Görüşmeleri",
+          details: ["2nci Yıl", "Ekstra Paket"],
+        },
         { name: "Özel Dersler", details: ["2nci Yıl", "Ekstra Paket"] },
-        { name: "Randevulu 40 Dakikalık Özel Dersler", details: ["Ekstra Paket"] },
+        {
+          name: "Randevulu 40 Dakikalık Özel Dersler",
+          details: ["Ekstra Paket"],
+        },
       ],
     },
   },
@@ -142,10 +181,19 @@ export const PRODUCTS = [
     additionalFeatures: {
       title: "Ek Özellikler",
       items: [
-        { name: "Soru Sorma Hakkı", details: ["1ci Yıl", "2nci Yıl", "Ekstra Paket"] },
-        { name: "Randevulu Küçük Grup Görüşmeleri", details: ["2nci Yıl", "Ekstra Paket"] },
+        {
+          name: "Soru Sorma Hakkı",
+          details: ["1ci Yıl", "2nci Yıl", "Ekstra Paket"],
+        },
+        {
+          name: "Randevulu Küçük Grup Görüşmeleri",
+          details: ["2nci Yıl", "Ekstra Paket"],
+        },
         { name: "Özel Dersler", details: ["2nci Yıl", "Ekstra Paket"] },
-        { name: "Randevulu 40 Dakikalık Özel Dersler", details: ["Ekstra Paket"] },
+        {
+          name: "Randevulu 40 Dakikalık Özel Dersler",
+          details: ["Ekstra Paket"],
+        },
       ],
     },
   },
@@ -164,7 +212,11 @@ export const PRODUCTS = [
     },
     features: {
       title: "Özellikler",
-      items: ["Deneme Sınavları & Soru Bankası", "Kişisel Gelişim Sistemi", "Uzman Eğitimleri"],
+      items: [
+        "Deneme Sınavları & Soru Bankası",
+        "Kişisel Gelişim Sistemi",
+        "Uzman Eğitimleri",
+      ],
     },
     additionalFeatures: {
       title: "Ek Özellikler",
@@ -200,14 +252,23 @@ export const PRODUCTS = [
     additionalFeatures: {
       title: "Ek Özellikler",
       items: [
-        { name: "Soru Sorma Hakkı", details: ["1ci Yıl", "2nci Yıl", "Ekstra Paket"] },
-        { name: "Randevulu Küçük Grup Görüşmeleri", details: ["2nci Yıl", "Ekstra Paket"] },
+        {
+          name: "Soru Sorma Hakkı",
+          details: ["1ci Yıl", "2nci Yıl", "Ekstra Paket"],
+        },
+        {
+          name: "Randevulu Küçük Grup Görüşmeleri",
+          details: ["2nci Yıl", "Ekstra Paket"],
+        },
         { name: "Özel Dersler", details: ["2nci Yıl", "Ekstra Paket"] },
-        { name: "Randevulu 40 Dakikalık Özel Dersler", details: ["Ekstra Paket"] },
+        {
+          name: "Randevulu 40 Dakikalık Özel Dersler",
+          details: ["Ekstra Paket"],
+        },
       ],
     },
   },
-] as const
+] as const;
 
 export const TESTIMONIALS = [
   {
@@ -215,7 +276,7 @@ export const TESTIMONIALS = [
     name: "Ayşe Kaya",
     role: "YKS Öğrencisi",
     content:
-      "EğitimMağaza sınav hazırlığımı tamamen dönüştürdü. Yapılandırılmış kurslar ve uzman rehberliği hedef puanıma ulaşmama yardımcı oldu.",
+      "Metrik Rehber sınav hazırlığımı tamamen dönüştürdü. Yapılandırılmış kurslar ve uzman rehberliği hedef puanıma ulaşmama yardımcı oldu.",
     avatar: "/placeholder.svg?height=60&width=60",
     rating: 5,
   },
@@ -233,11 +294,11 @@ export const TESTIMONIALS = [
     name: "Fatma Yılmaz",
     role: "KPSS Adayı",
     content:
-      "EğitimMağaza'nın kapsamlı materyalleri ve uzman eğitmenleri sayesinde KPSS sınavımı ilk denemede başarıyla geçtim.",
+      "Metrik Rehber'in kapsamlı materyalleri ve uzman eğitmenleri sayesinde KPSS sınavımı ilk denemede başarıyla geçtim.",
     avatar: "/placeholder.svg?height=60&width=60",
     rating: 5,
   },
-] as const
+] as const;
 
 export const FAQ_ITEMS = [
   {
@@ -270,7 +331,7 @@ export const FAQ_ITEMS = [
     answer:
       "Platformumuz tamamen duyarlı tasarıma sahip ve mobil cihazlar için optimize edilmiştir. Akıllı telefonunuz veya tabletinizi kullanarak her yerde, her zaman öğrenebilirsiniz.",
   },
-] as const
+] as const;
 
 export const FOOTER_LINKS = {
   company: [
@@ -291,4 +352,4 @@ export const FOOTER_LINKS = {
     { label: "Çerez Politikası", href: "#cookies" },
     { label: "Erişilebilirlik", href: "#accessibility" },
   ],
-} as const
+} as const;
