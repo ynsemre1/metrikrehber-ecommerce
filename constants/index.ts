@@ -38,22 +38,22 @@ export const PRODUCT_CATEGORIES = [
 export const PRODUCTS = [
   {
     id: 1,
-    title: "TYT Tüm Dersler + AYT Sayısal 2026",
-    image: "/placeholder.svg?height=300&width=400&text=Kurs+Paketi+1",
+    title: "LGS 2026 Tam Paket",
+    image: "/placeholder.svg?height=300&width=400&text=Kurs+Paketi+2",
     successRate: "%95 Başarı Oranı",
-    originalPrice: 33599,
-    discountedPrice: 24999,
+    originalPrice: 47999,
+    discountedPrice: 36999,
     installmentInfo: "%26 Taksitli",
     advancePayment: "Peşin Fiyatına 2.083 TL Taksitle",
     curriculum: {
       title: "Müfredat",
-      items: ["6.258 Ders Videosu", "39.335 Video Çözümlü Soru"],
+      items: ["980 Canlı Sınıf Dersi + Tekrar Videoları", "20.000+ Soruluk İnteraktif Soru Bankaları"],
     },
     features: {
       title: "Özellikler",
       items: [
-        "Deneme Sınavları & Soru Bankası",
-        "Gelişmiş Kişisel Gelişim Sistemi",
+        "15 TYT + AYT Canlı Dijital Deneme Sınavı",
+        "Ödev Takibi ve Etkin Rehberlik",
         "Uzman Eğitimleri",
       ],
     },
@@ -78,7 +78,7 @@ export const PRODUCTS = [
   },
   {
     id: 2,
-    title: "TYT Tüm Dersler + AYT Eşit Ağırlık 2026",
+    title: "LGS 2026 Tam Paket",
     image: "/placeholder.svg?height=300&width=400&text=Kurs+Paketi+2",
     successRate: "%95 Başarı Oranı",
     originalPrice: 33599,

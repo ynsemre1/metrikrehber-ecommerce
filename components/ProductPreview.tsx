@@ -76,7 +76,7 @@ export default function ProductPreview() {
                         {item}
                       </li>
                     ))}
-                    {product.features.items.slice(0, 1).map((item, index) => (
+                    {product.features.items.slice(0, 2).map((item, index) => (
                       <li key={index} className="flex items-center text-sm text-gray-700 font-medium">
                         <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3">
                           <Check className="w-3 h-3 text-green-600" />
