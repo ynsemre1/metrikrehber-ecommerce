@@ -1,22 +1,31 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Menu, X, Phone, Mail, Instagram, Youtube, Facebook, Sparkles } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { SITE_CONFIG, NAVIGATION_ITEMS } from "@/constants"
-import Link from "next/link"
+import { useState, useEffect } from "react";
+import {
+  Menu,
+  X,
+  Phone,
+  Mail,
+  Instagram,
+  Youtube,
+  Facebook,
+  Sparkles,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { SITE_CONFIG, NAVIGATION_ITEMS } from "@/constants";
+import Link from "next/link";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -56,14 +65,22 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center group">
               <div className="relative">
-                <div className="w-12 h-12 gradient-primary rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-all duration-300 shadow-lg shadow-purple-500/25">
-                  <Sparkles className="text-white font-bold text-lg animate-pulse" />
+                <div className="w-10 h-10 mr-3">
+                  <img
+                    src="/logo.png"
+                    alt="Logo"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-orange-400 rounded-full animate-bounce-slow"></div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold font-poppins text-gradient">{SITE_CONFIG.name}</h1>
-                <p className="text-xs text-gray-500 font-medium">{SITE_CONFIG.tagline}</p>
+                <h1 className="text-2xl font-bold font-poppins text-gradient">
+                  {SITE_CONFIG.name}
+                </h1>
+                <p className="text-xs text-gray-500 font-medium">
+                  {SITE_CONFIG.tagline}
+                </p>
               </div>
             </Link>
 
@@ -108,7 +125,11 @@ export default function Header() {
                 aria-label="Toggle menu"
                 className="hover:bg-purple-50"
               >
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {isMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
               </Button>
             </div>
           </div>
@@ -128,10 +149,15 @@ export default function Header() {
                   </Link>
                 ))}
                 <div className="px-4 pt-4 space-y-3">
-                  <Button variant="ghost" className="w-full justify-start font-semibold">
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start font-semibold"
+                  >
                     Giriş Yap
                   </Button>
-                  <Button className="w-full gradient-primary font-semibold">Başlayın</Button>
+                  <Button className="w-full gradient-primary font-semibold">
+                    Başlayın
+                  </Button>
                 </div>
               </div>
             </div>
@@ -139,5 +165,5 @@ export default function Header() {
         </div>
       </header>
     </>
-  )
+  );
 }

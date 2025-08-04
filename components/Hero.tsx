@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button"
-import { Play, Sparkles, Zap, Target } from "lucide-react"
-import { HERO_CONTENT } from "@/constants"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { Play, Sparkles, Zap, Target } from "lucide-react";
+import { HERO_CONTENT } from "@/constants";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -25,16 +25,24 @@ export default function Hero() {
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-100 to-green-100 px-4 py-2 rounded-full border border-purple-200">
                 <Sparkles className="w-4 h-4 text-purple-600" />
-                <span className="text-sm font-semibold text-purple-700">Yeni Nesil Eğitim Platformu</span>
+                <span className="text-sm font-semibold text-purple-700">
+                  Yeni Nesil Tabletli Eğitim Platformu
+                </span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-poppins leading-tight">
-                <span className="text-gradient">{HERO_CONTENT.headline.split(" ").slice(0, 3).join(" ")}</span>
+                <span className="text-gradient">
+                  {HERO_CONTENT.headline.split(" ").slice(0, 3).join(" ")}
+                </span>
                 <br />
-                <span className="text-gray-800">{HERO_CONTENT.headline.split(" ").slice(3).join(" ")}</span>
+                <span className="text-gray-800">
+                  {HERO_CONTENT.headline.split(" ").slice(3).join(" ")}
+                </span>
               </h1>
 
-              <p className="text-xl text-gray-600 leading-relaxed max-w-2xl font-medium">{HERO_CONTENT.description}</p>
+              <p className="text-xl text-gray-600 leading-relaxed max-w-2xl font-medium">
+                {HERO_CONTENT.description}
+              </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -64,11 +72,16 @@ export default function Hero() {
                 { number: "200+", label: "Kurs", icon: Sparkles },
                 { number: "95%", label: "Başarı Oranı", icon: Zap },
               ].map((stat, index) => (
-                <div key={index} className="text-center group hover:scale-105 transition-all duration-300">
+                <div
+                  key={index}
+                  className="text-center group hover:scale-105 transition-all duration-300"
+                >
                   <div className="flex justify-center mb-2">
                     <stat.icon className="w-6 h-6 text-purple-600 group-hover:text-orange-500 transition-colors duration-300" />
                   </div>
-                  <div className="text-3xl font-bold text-gradient font-poppins">{stat.number}</div>
+                  <div className="text-3xl font-bold text-gradient font-poppins">
+                    {stat.number}
+                  </div>
                   <div className="text-gray-600 font-medium">{stat.label}</div>
                 </div>
               ))}
@@ -81,8 +94,8 @@ export default function Hero() {
               {/* Main Image Container */}
               <div className="aspect-square bg-gradient-to-br from-purple-100 via-white to-green-100 rounded-3xl flex items-center justify-center shadow-2xl shadow-purple-500/20 hover-lift">
                 <img
-                  src="/placeholder.svg?height=500&width=500&text=Modern+Learning+Platform"
-                  alt="Modern Learning Platform"
+                  src="/hero_ogrenci.png"
+                  alt="Öğrenciler eğitim alıyor"
                   className="w-4/5 h-4/5 object-cover rounded-2xl"
                 />
               </div>
@@ -103,5 +116,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }
