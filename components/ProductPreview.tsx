@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Check, ArrowRight } from "lucide-react"
+import { Check, ArrowRight, Star, Zap } from "lucide-react"
 import { PRODUCTS } from "@/constants"
 import Link from "next/link"
 
@@ -11,51 +11,76 @@ export default function ProductPreview() {
   }
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Öne Çıkan Kurs Paketleri</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+    <section className="py-24 bg-gradient-to-br from-white via-purple-50/30 to-green-50/30 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-purple-100 rounded-full animate-pulse-slow opacity-50"></div>
+        <div className="absolute bottom-20 right-10 w-24 h-24 bg-orange-100 rounded-full animate-float opacity-50"></div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-100 to-green-100 px-4 py-2 rounded-full border border-purple-200 mb-6">
+            <Star className="w-4 h-4 text-purple-600" />
+            <span className="text-sm font-semibold text-purple-700">En Popüler Seçimler</span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-bold font-poppins mb-6">
+            <span className="text-gradient">Öne Çıkan</span> <span className="text-gray-800">Kurs Paketleri</span>
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto font-medium leading-relaxed">
             Akademik başarınıza ulaşmanıza yardımcı olmak için tasarlanmış en popüler kurs paketlerimizi keşfedin
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {featuredProducts.map((product) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {featuredProducts.map((product, index) => (
             <div
               key={product.id}
-              className="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300"
+              className="group bg-white rounded-3xl shadow-xl border border-purple-100 overflow-hidden hover-lift transition-all duration-500"
+              style={{ animationDelay: `${index * 200}ms` }}
             >
               {/* Product Image */}
-              <div className="relative">
+              <div className="relative overflow-hidden">
                 <img
                   src={product.image || "/placeholder.svg"}
                   alt={product.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 <div className="absolute top-4 left-4">
-                  <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-gradient-to-r from-purple-500 to-green-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                     {product.successRate}
                   </span>
+                </div>
+                <div className="absolute top-4 right-4">
+                  <div className="w-10 h-10 bg-orange-400 rounded-full flex items-center justify-center animate-pulse">
+                    <Zap className="w-5 h-5 text-white" />
+                  </div>
                 </div>
               </div>
 
               {/* Product Content */}
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-4 line-clamp-2">{product.title}</h3>
+              <div className="p-8">
+                <h3 className="text-xl font-bold font-poppins text-gray-900 mb-6 line-clamp-2 group-hover:text-purple-600 transition-colors duration-300">
+                  {product.title}
+                </h3>
 
                 {/* Key Features */}
-                <div className="mb-4">
-                  <ul className="space-y-2">
+                <div className="mb-6">
+                  <ul className="space-y-3">
                     {product.curriculum.items.slice(0, 2).map((item, index) => (
-                      <li key={index} className="flex items-center text-sm text-gray-700">
-                        <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                      <li key={index} className="flex items-center text-sm text-gray-700 font-medium">
+                        <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                          <Check className="w-3 h-3 text-green-600" />
+                        </div>
                         {item}
                       </li>
                     ))}
                     {product.features.items.slice(0, 1).map((item, index) => (
-                      <li key={index} className="flex items-center text-sm text-gray-700">
-                        <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                      <li key={index} className="flex items-center text-sm text-gray-700 font-medium">
+                        <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                          <Check className="w-3 h-3 text-green-600" />
+                        </div>
                         {item}
                       </li>
                     ))}
@@ -63,19 +88,25 @@ export default function ProductPreview() {
                 </div>
 
                 {/* Pricing */}
-                <div className="border-t pt-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-lg text-gray-500 line-through">{formatPrice(product.originalPrice)} TL</span>
-                    <span className="text-2xl font-bold text-blue-600">{formatPrice(product.discountedPrice)} TL</span>
+                <div className="border-t border-gray-100 pt-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-lg text-gray-400 line-through font-medium">
+                      {formatPrice(product.originalPrice)} TL
+                    </span>
+                    <span className="text-3xl font-bold text-gradient font-poppins">
+                      {formatPrice(product.discountedPrice)} TL
+                    </span>
                   </div>
 
-                  <div className="text-center mb-4">
-                    <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">
+                  <div className="text-center mb-6">
+                    <span className="bg-gradient-to-r from-orange-100 to-orange-200 text-orange-800 px-3 py-1 rounded-full text-sm font-semibold">
                       {product.installmentInfo}
                     </span>
                   </div>
 
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">Detayları Görüntüle</Button>
+                  <Button className="w-full gradient-primary hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/25 font-bold py-3 rounded-xl">
+                    Detayları Görüntüle
+                  </Button>
                 </div>
               </div>
             </div>
@@ -85,9 +116,13 @@ export default function ProductPreview() {
         {/* See All Products Button */}
         <div className="text-center">
           <Link href="/products">
-            <Button size="lg" variant="outline" className="text-lg px-8 py-3 bg-transparent">
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-lg px-10 py-4 border-2 border-purple-200 hover:bg-purple-50 hover:border-purple-300 transition-all duration-300 font-bold rounded-xl group bg-transparent"
+            >
               Tüm Ürünleri Gör
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
           </Link>
         </div>

@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
-  name: "Metrik Rehber",
-  tagline: "Premium Eğitim Kursları",
+  name: "Mehrik Rehber",
+  tagline: "Premium Tabletli Eğitim Kursları",
   description:
     "Sektör uzmanları tarafından tasarlanan kapsamlı online kurslarımızla öğrenme yolculuğunuzu dönüştürün. Kendi hızınızda öğrenin ve hedeflerinize ulaşın.",
   phone: "0 533 236 20 05",
