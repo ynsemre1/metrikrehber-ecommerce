@@ -26,17 +26,17 @@ export default function Hero() {
               <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-100 to-green-100 px-4 py-2 rounded-full border border-purple-200">
                 <Sparkles className="w-4 h-4 text-purple-600" />
                 <span className="text-sm font-semibold text-purple-700">
-                  Yeni Nesil Tabletli Eğitim Platformu
+                  Etkin Araçlarla Yenilikci Eğitim
                 </span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-poppins leading-tight">
                 <span className="text-gradient">
-                  {HERO_CONTENT.headline.split(" ").slice(0, 3).join(" ")}
+                  {HERO_CONTENT.headline.split(" ").slice(0, 2).join(" ")}
                 </span>
                 <br />
                 <span className="text-gray-800">
-                  {HERO_CONTENT.headline.split(" ").slice(3).join(" ")}
+                  {HERO_CONTENT.headline.split(" ").slice(2).join(" ")}
                 </span>
               </h1>
 
@@ -68,9 +68,9 @@ export default function Hero() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 pt-8">
               {[
-                { number: "50K+", label: "Öğrenci", icon: Target },
-                { number: "200+", label: "Kurs", icon: Sparkles },
-                { number: "95%", label: "Başarı Oranı", icon: Zap },
+                { number: "4000+", label: "Canlı Sınıf Dersi", icon: Target },
+                { number: "Dijital Defter", label: "Günlük Tablet ile Not Tutun", icon: Sparkles },
+                { number: "30K+ Soru", label: "İnteraktif Soru Bankası", icon: Zap },
               ].map((stat, index) => (
                 <div
                   key={index}

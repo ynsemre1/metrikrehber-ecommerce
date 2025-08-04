@@ -17,11 +17,11 @@ export const NAVIGATION_ITEMS = [
 ] as const;
 
 export const HERO_CONTENT = {
-  headline: "Uzman Eğitmenlerle Sınavlarınızda Başarıya Ulaşın",
+  headline: "TÜRKİYE'DE İLK Dijital Araçlarla Başarıyı Garantiye Alın",
   description:
-    "Kapsamlı online eğitim platformumuz aracılığıyla akademik hedeflerine ulaşan binlerce başarılı öğrenciye katıl. Başarı yolculuğuna bugün başla.",
-  ctaText: "Kursları Keşfet",
-  ctaSecondary: "Demo İzle",
+    "Metrik Rehber olarak sizlere, bilgi çağının tekniklerini etkin bir şekilde kullanarak hedef odaklı yenilikçi bir online eğitim platformu sunuyoruz. Dijital defter uygulaması sayesinde paketlere dahil grafik tabletler ile notlarınızı alabilecek, istediğiniz zaman bu notlarla çalışabileceksiniz. İnteraktif ödev etütleri sayesinde çalışmalarınıza eşlik ederek başarınızı garanti altına alıyoruz.",
+  ctaText: "Tüm Kurslar",
+  ctaSecondary: "Örnek Derse Katıl",
 } as const;
 
 export const PRODUCT_CATEGORIES = [
