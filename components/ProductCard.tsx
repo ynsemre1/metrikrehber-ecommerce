@@ -12,17 +12,17 @@ interface Product {
   advancePayment: string
   curriculum: {
     title: string
-    items: ReadonlyArray<string>  
+    items: ReadonlyArray<string>       
   }
   features: {
     title: string
-    items: ReadonlyArray<string>   
+    items: ReadonlyArray<string>       
   }
   additionalFeatures: {
     title: string
-    items: Array<{
+    items: ReadonlyArray<{             
       name: string
-      details: ReadonlyArray<string>  
+      details: ReadonlyArray<string>   
     }>
   }
 }
