@@ -4,8 +4,11 @@ import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { FAQ_ITEMS } from "@/constants"
 
+// Dizideki herhangi bir elemanın tipi:
+type FaqItem = (typeof FAQ_ITEMS)[number]
+
 interface FAQItemProps {
-  item: (typeof FAQ_ITEMS)[0]
+  item: FaqItem
   isOpen: boolean
   onToggle: () => void
 }
@@ -20,9 +23,7 @@ function FAQItem({ item, isOpen, onToggle }: FAQItemProps) {
       >
         <span className="font-semibold text-gray-900 pr-4">{item.question}</span>
         <ChevronDown
-          className={`w-5 h-5 text-gray-500 transition-transform duration-200 flex-shrink-0 ${
-            isOpen ? "transform rotate-180" : ""
-          }`}
+          className={`w-5 h-5 text-gray-500 transition-transform duration-200 flex-shrink-0 ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
 
@@ -39,13 +40,11 @@ export default function FAQ() {
   const [openItems, setOpenItems] = useState<Set<number>>(new Set())
 
   const toggleItem = (id: number) => {
-    const newOpenItems = new Set(openItems)
-    if (newOpenItems.has(id)) {
-      newOpenItems.delete(id)
-    } else {
-      newOpenItems.add(id)
-    }
-    setOpenItems(newOpenItems)
+    setOpenItems(prev => {
+      const next = new Set(prev)
+      next.has(id) ? next.delete(id) : next.add(id)
+      return next
+    })
   }
 
   return (
@@ -60,7 +59,12 @@ export default function FAQ() {
 
         <div className="max-w-3xl mx-auto space-y-4">
           {FAQ_ITEMS.map((item) => (
-            <FAQItem key={item.id} item={item} isOpen={openItems.has(item.id)} onToggle={() => toggleItem(item.id)} />
+            <FAQItem
+              key={item.id}
+              item={item}
+              isOpen={openItems.has(item.id)}
+              onToggle={() => toggleItem(item.id)}
+            />
           ))}
         </div>
 
