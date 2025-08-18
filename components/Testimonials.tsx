@@ -1,8 +1,13 @@
-import { Star } from "lucide-react"
-import { TESTIMONIALS } from "@/constants"
+"use client";
+
+import { Star } from "lucide-react";
+import { TESTIMONIALS } from "@/constants";
+
+// Dizideki herhangi bir öğenin tipi:
+type Testimonial = (typeof TESTIMONIALS)[number];
 
 interface TestimonialCardProps {
-  testimonial: (typeof TESTIMONIALS)[0]
+  testimonial: Testimonial;
 }
 
 function TestimonialCard({ testimonial }: TestimonialCardProps) {
@@ -14,7 +19,9 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
         ))}
       </div>
 
-      <blockquote className="text-gray-700 mb-6 leading-relaxed">"{testimonial.content}"</blockquote>
+      <blockquote className="text-gray-700 mb-6 leading-relaxed">
+        “{testimonial.content}”
+      </blockquote>
 
       <div className="flex items-center">
         <img
@@ -28,7 +35,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default function Testimonials() {
@@ -36,30 +43,34 @@ export default function Testimonials() {
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Öğrencilerimiz Ne Diyor</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Öğrencilerimiz Ne Diyor
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Platformumuzla akademik yolculuklarını dönüştüren binlerce başarılı öğrenciye katılın
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {TESTIMONIALS.map((testimonial) => (
-            <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+          {TESTIMONIALS.map((t) => (
+            <TestimonialCard key={t.id} testimonial={t} />
           ))}
         </div>
 
         {/* Trust Indicators */}
         <div className="mt-16 text-center">
-          <p className="text-gray-600 mb-8">En iyi üniversitelerden öğrenciler tarafından güveniliyor</p>
+          <p className="text-gray-600 mb-8">
+            En iyi üniversitelerden öğrenciler tarafından güveniliyor
+          </p>
           <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-            {["Boğaziçi", "İTÜ", "ODTÜ", "Hacettepe", "Bilkent"].map((university) => (
-              <div key={university} className="text-2xl font-bold text-gray-400">
-                {university}
+            {["Boğaziçi", "İTÜ", "ODTÜ", "Hacettepe", "Bilkent"].map((u) => (
+              <div key={u} className="text-2xl font-bold text-gray-400">
+                {u}
               </div>
             ))}
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
