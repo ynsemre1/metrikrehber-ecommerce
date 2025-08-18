@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   tagline: "Premium Tabletli Eğitim Kursları",
   description:
     "Sektör uzmanları tarafından tasarlanan kapsamlı online kurslarımızla öğrenme yolculuğunuzu dönüştürün. Kendi hızınızda öğrenin ve hedeflerinize ulaşın.",
-  phone: "0 533 236 20 05",
+  phone: "05074868484",
   email: "info@metrikrehber.com",
 } as const;
 
