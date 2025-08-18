@@ -1,14 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+        pathname: '/uploads/**',
+      },
+      // Prod Strapi için örnek:
+      // {
+      //   protocol: 'https',
+      //   hostname: 'api.metrikrehber.com',
+      //   pathname: '/uploads/**',
+      // },
+    ],
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
