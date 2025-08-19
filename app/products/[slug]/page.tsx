@@ -37,7 +37,7 @@ async function getProductBySlug(slug: string): Promise<Product | null> {
   });
 
   const raw = data?.[0];
-  if (!raw) return null;
+  if (!raw || !raw.attributes || !raw.attributes.title) return null;
 
   const p = raw.attributes;
 
