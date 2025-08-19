@@ -1,10 +1,12 @@
-// app/products/[slug]/page.tsx
-
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 import { fetchProducts, mediaUrl } from "@/lib/strapi";
 import ProductDetail from "@/components/ProductDetail";
+
+export const metadata = {
+  title: "Ürün Detayı | Metrik Rehber",
+  description: "Eğitim paketimizin detaylı sayfası",
+};
 
 interface Product {
   id: number;
@@ -69,7 +71,7 @@ async function getProductBySlug(slug: string): Promise<Product | null> {
   };
 }
 
-export default async function ProductDetailPage({
+export default async function Page({
   params,
 }: {
   params: { slug: string };
