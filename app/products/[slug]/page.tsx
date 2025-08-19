@@ -9,7 +9,7 @@ interface PageProps {
   };
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: { params: any }) {
   const { data } = await fetchProducts({
     "filters[slug][$eq]": params.slug,
     populate: "*",
@@ -24,20 +24,16 @@ export default async function Page({ params }: PageProps) {
     );
   }
 
-  const p = raw;
-
   const product = {
-    id: p.id,
-    title: p.title,
-    slug: p.slug,
+    id: raw.id,
+    title: raw.title,
+    slug: raw.slug,
     category: {
-      title: p.category?.title || "Kategori Yok",
+      title: raw.category?.title || "Kategori Yok",
     },
-    description: p.description,
-    price: p.price,
-    images: p.images?.map((img: any) => ({
-      url: img.url,
-    })) || [],
+    description: raw.description,
+    price: raw.price,
+    images: raw.images?.map((img: any) => ({ url: img.url })) || [],
   };
 
   return (
