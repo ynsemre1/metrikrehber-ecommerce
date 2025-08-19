@@ -18,23 +18,22 @@ async function getProductBySlug(slug: string): Promise<Product | null> {
   const { data } = await fetchProducts({
     "filters[slug][$eq]": slug,
     populate: "*",
-  });
+  })
 
-  const raw = data?.[0];
-  if (!raw) return null;
+  if (!data || !data.attributes) return null
 
-  const p = raw;
+  const p = data.attributes
 
   return {
-    id: p.id,
+    id: data.id,
     title: p.title,
     slug: p.slug,
-    categoryTitle: p.category?.title || "Kategori Yok",
+    categoryTitle: p.category?.data?.attributes?.title || "Kategori Yok",
     description: p.description || "",
-    price: p.price,
+    price: p.price || 0,
     image: mediaUrl(p.images?.[0]?.url),
-    images: p.images?.map((img: any) => mediaUrl(img?.url)) || [],
-  };
+    images: (p.images || []).map((img: any) => mediaUrl(img?.url)),
+  }
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
