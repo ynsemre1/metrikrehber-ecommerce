@@ -8,26 +8,10 @@ interface Product {
   title: string;
   slug: string;
   image: string;
-  successRate: number;
-  originalPrice: number;
-  discountedPrice: number;
-  installmentInfo: string;
-  advancePayment: string;
-  curriculum: {
-    title: string;
-    items: string[];
-  };
-  features: {
-    title: string;
-    items: string[];
-  };
-  additionalFeatures: {
-    title: string;
-    items: {
-      name: string;
-      details: string[];
-    }[];
-  };
+  categoryTitle: string;
+  description: string;
+  price: number;
+  images: string[];
 }
 
 async function getProductBySlug(slug: string): Promise<Product | null> {
@@ -37,36 +21,23 @@ async function getProductBySlug(slug: string): Promise<Product | null> {
   });
 
   const raw = data?.[0];
-  if (!raw || !raw.attributes || !raw.attributes.title) return null;
+  if (!raw) return null;
 
-  const p = raw.attributes;
+  const p = raw;
 
   return {
-    id: raw.id,
+    id: p.id,
     title: p.title,
     slug: p.slug,
-    image: mediaUrl(p.image?.url),
-    successRate: Number(p.successRate) || 0,
-    originalPrice: p.originalPrice,
-    discountedPrice: p.discountedPrice,
-    installmentInfo: p.installmentInfo,
-    advancePayment: p.advancePayment,
-    curriculum: {
-      title: p.curriculumTitle,
-      items: p.curriculumItems ?? [],
-    },
-    features: {
-      title: p.featuresTitle,
-      items: p.featuresItems ?? [],
-    },
-    additionalFeatures: {
-      title: p.additionalFeaturesTitle,
-      items: p.additionalFeatures ?? [],
-    },
+    categoryTitle: p.category?.title || "Kategori Yok",
+    description: p.description || "",
+    price: p.price,
+    image: mediaUrl(p.images?.[0]?.url),
+    images: p.images?.map((img: any) => mediaUrl(img?.url)) || [],
   };
 }
 
-export default async function Page({ params }: { params: any }) {
+export default async function Page({ params }: { params: { slug: string } }) {
   const product = await getProductBySlug(params.slug);
 
   if (!product) {
