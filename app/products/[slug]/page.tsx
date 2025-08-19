@@ -3,11 +3,6 @@ export const dynamic = "force-dynamic";
 import { fetchProducts, mediaUrl } from "@/lib/strapi";
 import ProductDetail from "@/components/ProductDetail";
 
-export const metadata = {
-  title: "Ürün Detayı | Metrik Rehber",
-  description: "Eğitim paketimizin detaylı sayfası",
-};
-
 interface Product {
   id: number;
   title: string;
@@ -71,11 +66,7 @@ async function getProductBySlug(slug: string): Promise<Product | null> {
   };
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function Page({ params }: { params: any }) {
   const product = await getProductBySlug(params.slug);
 
   if (!product) {
