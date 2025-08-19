@@ -11,30 +11,39 @@ interface ProductDetailProps {
     id: number
     title: string
     slug: string
-    categoryTitle: string
+    category: {
+      title: string
+    }
     description: string
     price: number
-    image: string
-    images: string[]
+    images: { url: string }[]
   }
 }
 
 export default function ProductDetail({ product }: ProductDetailProps) {
+  const fullImageUrl = (path: string) =>
+    path.startsWith("http") ? path : `https://metrik-api.onrender.com${path}`
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-10 space-y-10">
       {/* Başlık */}
       <div>
         <h1 className="text-3xl font-bold text-foreground">{product.title}</h1>
-        <p className="text-muted-foreground mt-2">{product.categoryTitle}</p>
+        <p className="text-muted-foreground mt-2">{product.category.title}</p>
       </div>
 
       {/* Görsel + Fiyat */}
       <div className="grid md:grid-cols-2 gap-6 items-start">
         {/* Resim */}
         <div className="space-y-4">
-          {product.images.map((src, i) => (
+          {product.images.map((img, i) => (
             <div key={i} className="relative aspect-square rounded-xl overflow-hidden border">
-              <Image src={src} alt={product.title} fill className="object-cover" />
+              <Image
+                src={fullImageUrl(img.url)}
+                alt={product.title}
+                fill
+                className="object-cover"
+              />
             </div>
           ))}
         </div>
