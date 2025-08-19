@@ -1,11 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight, Star, Zap } from "lucide-react";
-import { PRODUCTS } from "@/constants";
 import Link from "next/link";
 import { mediaUrl } from "@/lib/strapi";
 
-export default function ProductPreview() {
-  const featuredProducts = PRODUCTS.slice(0, 3);
+interface ProductPreviewProps {
+  products: any[]; // istersen tip tanımlarsın
+}
+
+export default function ProductPreview({ products }: ProductPreviewProps) {
+  const featuredProducts = products.slice(0, 3);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("tr-TR").format(price);
@@ -47,7 +50,7 @@ export default function ProductPreview() {
               {/* Product Image */}
               <div className="relative overflow-hidden">
                 <img
-                  src={product.image || "/placeholder.svg"}
+                  src={mediaUrl(product.image?.url) || "/placeholder.svg"}
                   alt={product.title}
                   className="w-full h-52 object-cover"
                 />
@@ -73,28 +76,19 @@ export default function ProductPreview() {
                 {/* Key Features */}
                 <div className="mb-6">
                   <ul className="space-y-3">
-                    {product.curriculum.items.slice(0, 2).map((item, index) => (
-                      <li
-                        key={index}
-                        className="flex items-center text-sm text-gray-700 font-medium"
-                      >
-                        <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                          <Check className="w-3 h-3 text-green-600" />
-                        </div>
-                        {item}
-                      </li>
-                    ))}
-                    {product.features.items.slice(0, 2).map((item, index) => (
-                      <li
-                        key={index}
-                        className="flex items-center text-sm text-gray-700 font-medium"
-                      >
-                        <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                          <Check className="w-3 h-3 text-green-600" />
-                        </div>
-                        {item}
-                      </li>
-                    ))}
+                    {product.curriculum?.items
+                      ?.slice(0, 2)
+                      .map((item: string, index: number) => (
+                        <li
+                          key={index}
+                          className="flex items-center text-sm text-gray-700 font-medium"
+                        >
+                          <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                            <Check className="w-3 h-3 text-green-600" />
+                          </div>
+                          {item}
+                        </li>
+                      ))}
                   </ul>
                 </div>
 

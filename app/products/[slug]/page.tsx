@@ -1,53 +1,62 @@
 // app/products/[slug]/page.tsx
+
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-import Image from "next/image";
-import { fetchProducts, mediaUrl } from "@/lib/strapi";
+import { fetchProducts } from "@/lib/strapi";
+import ProductDetail from "@/components/ProductDetail";
+import { mediaUrl } from "@/lib/strapi";
 
 async function getProductBySlug(slug: string) {
-  const { data } = await fetchProducts({ "filters[slug][$eq]": slug });
-  return data?.[0] ?? null; 
+  const { data } = await fetchProducts({ "filters[slug][$eq]": slug, populate: "*" });
+  const raw = data?.[0];
+  if (!raw) return null;
+
+  const p = raw.attributes;
+
+  return {
+    id: raw.id,
+    title: p.title,
+    slug: p.slug,
+    image: mediaUrl(p.image?.url),
+    successRate: parseInt(p.successRate) || 0,
+    originalPrice: p.originalPrice,
+    discountedPrice: p.discountedPrice,
+    installmentInfo: p.installmentInfo,
+    advancePayment: p.advancePayment,
+    curriculum: {
+      title: p.curriculumTitle,
+      items: p.curriculumItems || [],
+    },
+    features: {
+      title: p.featuresTitle,
+      items: p.featuresItems || [],
+    },
+    additionalFeatures: {
+      title: p.additionalFeaturesTitle,
+      items: p.additionalFeatures || [],
+    },
+  };
 }
 
-// Next 14.2+/15: params bir Promise → await et
-export default async function ProductDetail(
-  props: { params: Promise<{ slug: string }> }
-) {
-  const { slug } = await props.params;
-  const p = await getProductBySlug(slug);
+export default async function ProductDetailPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const product = await getProductBySlug(params.slug);
 
-  if (!p) {
+  if (!product) {
     return (
       <main className="p-6">
-        Ürün bulunamadı. (slug: <code>{slug}</code>)
+        Ürün bulunamadı. (slug: <code>{params.slug}</code>)
       </main>
     );
   }
 
-  const imgs: any[] = p.images || [];
-
   return (
-    <main className="mx-auto max-w-5xl p-6 grid md:grid-cols-2 gap-8">
-      <div className="space-y-4">
-        {imgs.map((a) => {
-          const src = mediaUrl(a?.url);
-          return (
-            <div key={a.documentId ?? src} className="relative aspect-square rounded-xl overflow-hidden">
-              <Image src={src} alt={p.title} fill className="object-cover" />
-            </div>
-          );
-        })}
-      </div>
-
-      <div>
-        <h1 className="text-3xl font-semibold">{p.title}</h1>
-        <div className="mt-2 opacity-80">{p.category?.title}</div>
-        <div className="mt-4 text-2xl font-bold">
-          {Intl.NumberFormat("tr-TR").format(p.price)}₺
-        </div>
-        <p className="mt-4 leading-7 whitespace-pre-line">{p.description}</p>
-      </div>
-    </main>
+    <div className="bg-background min-h-screen">
+      <ProductDetail product={product} />
+    </div>
   );
 }
