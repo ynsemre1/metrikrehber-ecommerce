@@ -1,14 +1,15 @@
-import { Button } from "@/components/ui/button"
-import { Check, ArrowRight, Star, Zap } from "lucide-react"
-import { PRODUCTS } from "@/constants"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { Check, ArrowRight, Star, Zap } from "lucide-react";
+import { PRODUCTS } from "@/constants";
+import Link from "next/link";
+import { mediaUrl } from "@/lib/strapi";
 
 export default function ProductPreview() {
-  const featuredProducts = PRODUCTS.slice(0, 3)
+  const featuredProducts = PRODUCTS.slice(0, 3);
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("tr-TR").format(price)
-  }
+    return new Intl.NumberFormat("tr-TR").format(price);
+  };
 
   return (
     <section className="py-24 bg-gradient-to-br from-white via-purple-50/30 to-green-50/30 relative overflow-hidden">
@@ -22,13 +23,17 @@ export default function ProductPreview() {
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-100 to-green-100 px-4 py-2 rounded-full border border-purple-200 mb-6">
             <Star className="w-4 h-4 text-purple-600" />
-            <span className="text-sm font-semibold text-purple-700">En Popüler Seçimler</span>
+            <span className="text-sm font-semibold text-purple-700">
+              En Popüler Seçimler
+            </span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold font-poppins mb-6">
-            <span className="text-gradient">Öne Çıkan</span> <span className="text-gray-800">Kurs Paketleri</span>
+            <span className="text-gradient">Öne Çıkan</span>{" "}
+            <span className="text-gray-800">Kurs Paketleri</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto font-medium leading-relaxed">
-            Akademik başarınıza ulaşmanıza yardımcı olmak için tasarlanmış en popüler kurs paketlerimizi keşfedin
+            Akademik başarınıza ulaşmanıza yardımcı olmak için tasarlanmış en
+            popüler kurs paketlerimizi keşfedin
           </p>
         </div>
 
@@ -44,7 +49,7 @@ export default function ProductPreview() {
                 <img
                   src={product.image || "/placeholder.svg"}
                   alt={product.title}
-                  className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-52 object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 <div className="absolute top-4 left-4">
@@ -69,7 +74,10 @@ export default function ProductPreview() {
                 <div className="mb-6">
                   <ul className="space-y-3">
                     {product.curriculum.items.slice(0, 2).map((item, index) => (
-                      <li key={index} className="flex items-center text-sm text-gray-700 font-medium">
+                      <li
+                        key={index}
+                        className="flex items-center text-sm text-gray-700 font-medium"
+                      >
                         <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3">
                           <Check className="w-3 h-3 text-green-600" />
                         </div>
@@ -77,7 +85,10 @@ export default function ProductPreview() {
                       </li>
                     ))}
                     {product.features.items.slice(0, 2).map((item, index) => (
-                      <li key={index} className="flex items-center text-sm text-gray-700 font-medium">
+                      <li
+                        key={index}
+                        className="flex items-center text-sm text-gray-700 font-medium"
+                      >
                         <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3">
                           <Check className="w-3 h-3 text-green-600" />
                         </div>
@@ -128,5 +139,5 @@ export default function ProductPreview() {
         </div>
       </div>
     </section>
-  )
+  );
 }
