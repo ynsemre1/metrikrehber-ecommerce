@@ -8,14 +8,13 @@ const nextConfig = {
         port: '1337',
         pathname: '/uploads/**',
       },
-      // Prod Strapi için örnek:
-      // {
-      //   protocol: 'https',
-      //   hostname: 'api.metrikrehber.com',
-      //   pathname: '/uploads/**',
-      // },
+      {
+        protocol: 'https',
+        hostname: 'metrik-api.onrender.com',
+        pathname: '/uploads/**',
+      },
     ],
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig

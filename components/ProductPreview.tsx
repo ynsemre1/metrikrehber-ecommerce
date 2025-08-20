@@ -4,7 +4,7 @@ import Link from "next/link";
 import { mediaUrl } from "@/lib/strapi";
 
 interface ProductPreviewProps {
-  products: any[]; // istersen tip tanımlarsın
+  products: any[];
 }
 
 export default function ProductPreview({ products }: ProductPreviewProps) {

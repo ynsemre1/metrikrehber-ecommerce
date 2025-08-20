@@ -16,7 +16,13 @@ interface ProductDetailProps {
     }
     description: string
     price: number
-    images: { url: string }[]
+    images: {
+      url: string
+      formats?: {
+        medium?: { url: string }
+        large?: { url: string }
+      }
+    }[]
   }
 }
 
@@ -34,18 +40,25 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
       {/* Görsel + Fiyat */}
       <div className="grid md:grid-cols-2 gap-6 items-start">
-        {/* Resim */}
+        {/* Resimler */}
         <div className="space-y-4">
-          {product.images.map((img, i) => (
-            <div key={i} className="relative aspect-square rounded-xl overflow-hidden border">
-              <Image
-                src={fullImageUrl(img.url)}
-                alt={product.title}
-                fill
-                className="object-cover"
-              />
-            </div>
-          ))}
+          {product.images.map((img, i) => {
+            const path =
+              img.formats?.medium?.url ||
+              img.formats?.large?.url ||
+              img.url
+
+            return (
+              <div key={i} className="relative aspect-square rounded-xl overflow-hidden border">
+                <Image
+                  src={fullImageUrl(path)}
+                  alt={product.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )
+          })}
         </div>
 
         {/* Bilgi ve Satın Alma */}
@@ -57,7 +70,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               </div>
               <div className="flex gap-3">
                 <Button className="w-full">Satın Al</Button>
-                <Button variant="outline" className="w-full">Sepete Ekle</Button>
+                <Button variant="outline" className="w-full">
+                  Sepete Ekle
+                </Button>
               </div>
               <div className="text-muted-foreground text-sm">
                 Tüm cihazlarda erişim. 30 gün içinde iade garantisi.
