@@ -1,23 +1,62 @@
-// src/lib/strapi.ts
+// lib/strapi.ts
 
-export const API =
-  (process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337").replace(/\/$/, "");
+import qs from "qs";
+import { Product } from "@/types/product"; // Yeni oluşturacağımız type dosyasından gelecek
 
-export async function fetchProducts(params: Record<string, string> = {}) {
-  const url = new URL(`${API}/api/products`);
-  url.searchParams.set("populate", "*");
-  url.searchParams.set("sort", "createdAt:desc");
-
-  for (const [k, v] of Object.entries(params)) {
-    url.searchParams.set(k, v);
-  }
-
-  const res = await fetch(url.toString(), { cache: "no-store" });
-  if (!res.ok) throw new Error(`Products fetch failed: ${res.status}`);
-  return res.json(); // { data, meta }
+export function mediaUrl(url?: string) {
+  return url?.startsWith("/") ? `https://metrik-api.onrender.com${url}` : url;
 }
 
-export function mediaUrl(path?: string) {
-  if (!path) return "";
-  return path.startsWith("http") ? path : `${API}${path}`;
+export async function fetchProducts(params?: Record<string, any>) {
+  const query = qs.stringify(params || {}, { encodeValuesOnly: true });
+  const res = await fetch(`https://metrik-api.onrender.com/api/products?${query}`);
+  const json = await res.json();
+
+  return {
+    data: json.data.map(normalizeProduct),
+  };
+}
+
+export async function fetchProductBySlug(slug: string) {
+  const { data } = await fetchProducts({
+    filters: {
+      slug: { $eq: slug },
+    },
+    populate: "*",
+  });
+
+  return data[0]; // normalize edilmiş halde gelir
+}
+
+export function normalizeProduct(item: any): Product {
+  const p = item.attributes ?? item;
+
+  return {
+    id: item.id,
+    slug: p.slug,
+    title: p.title || "Başlıksız Ürün",
+    image: p.images?.data?.[0]?.attributes || { url: "" },
+    discountedPrice: Number(String(p.price).replace(",", "")) || 0,
+    originalPrice: Number(String(p.price).replace(",", "")) + 1000 || 1000,
+    successRate: "98%",
+    installmentInfo: "Taksitli Ödeme",
+    advancePayment: "Peşinat Yok",
+    curriculum: {
+      title: "Müfredat Bilgisi Yok",
+      items: ["İçerik bulunamadı"],
+    },
+    features: {
+      title: "Özellik Yok",
+      items: ["Hiçbir özellik belirtilmedi"],
+    },
+    additionalFeatures: {
+      title: "Ek Özellik Yok",
+      items: [
+        {
+          name: "Belirtilmemiş",
+          details: ["Detay yok"],
+        },
+      ],
+    },
+  };
 }

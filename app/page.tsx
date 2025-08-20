@@ -10,35 +10,7 @@ import Footer from "@/components/Footer";
 import { fetchProducts } from "@/lib/strapi";
 
 export default async function HomePage() {
-  const { data } = await fetchProducts({ populate: "*" });
-
-  const products = data.map((item: any) => {
-    return {
-      id: item.id,
-      title: item.title || "Başlıksız Ürün",
-      image: item.images?.[0] || { url: "" },
-      originalPrice: item.originalPrice ?? item.price + 10000,
-      discountedPrice: item.price ?? 0,
-      successRate: item.successRate ?? "98%",
-      curriculum: {
-        title: item.curriculum?.title ?? "Müfredat Bilgisi Yok",
-        items: item.curriculum?.items ?? ["İçerik bulunamadı"],
-      },
-      features: {
-        title: item.features?.title ?? "Özellik Yok",
-        items: item.features?.items ?? ["Hiçbir özellik belirtilmedi"],
-      },
-      additionalFeatures: {
-        title: item.additionalFeatures?.title ?? "Ek Özellik Yok",
-        items: item.additionalFeatures?.items ?? [
-          {
-            name: "Belirtilmemiş",
-            details: ["Detay yok"],
-          },
-        ],
-      },
-    };
-  });
+  const { data: products } = await fetchProducts({ populate: "*" });
 
   return (
     <div className="min-h-screen">

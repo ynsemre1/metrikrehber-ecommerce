@@ -1,44 +1,34 @@
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-import { fetchProducts, mediaUrl } from "@/lib/strapi";
+import { fetchProductBySlug } from "@/lib/strapi";
 import ProductDetail from "@/components/ProductDetail";
+import { Product } from "@/types/product";
 
-interface PageProps {
+export default async function Page(props: {
   params: {
     slug: string;
   };
-}
+}) {
+  const slug = props.params.slug;
 
-export default async function Page({ params }: { params: any }) {
-  const { data } = await fetchProducts({
-    "filters[slug][$eq]": params.slug,
-    populate: "*",
-  });
+  const product: Product | undefined = await fetchProductBySlug(slug);
 
-  const raw = data?.[0];
-  if (!raw) {
+  if (!product) {
     return (
       <main className="p-6">
-        Ürün bulunamadı. (slug: <code>{params.slug}</code>)
+        Ürün bulunamadı. (slug: <code>{slug}</code>)
       </main>
     );
   }
-
-  const product = {
-    id: raw.id,
-    title: raw.title,
-    slug: raw.slug,
-    category: {
-      title: raw.category?.title || "Kategori Yok",
-    },
-    description: raw.description,
-    price: raw.price,
-    images: raw.images?.map((img: any) => ({ url: img.url })) || [],
-  };
 
   return (
     <div className="bg-background min-h-screen">
       <ProductDetail product={product} />
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  return [];
 }

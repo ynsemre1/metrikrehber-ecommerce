@@ -1,34 +1,8 @@
 import { Check, Star, Zap, Target, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { mediaUrl } from "@/lib/strapi";
-
-interface Product {
-  id: number
-  title: string
-  image?: {
-    url: string
-  }
-  successRate: string
-  originalPrice: number
-  discountedPrice: number
-  installmentInfo: string
-  advancePayment: string
-  curriculum: {
-    title: string
-    items: ReadonlyArray<string>
-  }
-  features: {
-    title: string
-    items: ReadonlyArray<string>
-  }
-  additionalFeatures: {
-    title: string
-    items: ReadonlyArray<{
-      name: string
-      details: ReadonlyArray<string>
-    }>
-  }
-}
+import { Product } from "@/types/product";
+import Link from "next/link";
 
 interface ProductCardProps {
   product: Product;
@@ -161,9 +135,11 @@ export default function ProductCard({ product }: ProductCardProps) {
             <span className="font-medium">{product.advancePayment}</span>
           </div>
 
-          <Button className="w-full gradient-primary hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/25 font-bold py-3 rounded-xl">
-            Sepete Ekle
-          </Button>
+          <Link href={`/products/${product.slug}`}>
+            <Button className="w-full gradient-primary hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/25 font-bold py-3 rounded-xl">
+              Detayları Gör
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

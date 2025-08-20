@@ -2,9 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Check, ArrowRight, Star, Zap } from "lucide-react";
 import Link from "next/link";
 import { mediaUrl } from "@/lib/strapi";
+import { Product } from "@/types/product";
 
 interface ProductPreviewProps {
-  products: any[];
+  products: Product[];
 }
 
 export default function ProductPreview({ products }: ProductPreviewProps) {
@@ -35,14 +36,14 @@ export default function ProductPreview({ products }: ProductPreviewProps) {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {featuredProducts.map((product, index) => (
+          {featuredProducts.map((product) => (
             <div
               key={product.id}
               className="group bg-white rounded-3xl shadow-xl border border-purple-100 overflow-hidden hover-lift transition-all duration-500"
             >
               <div className="relative overflow-hidden">
                 <img
-                  src={mediaUrl(product.image?.formats?.medium?.url || product.image?.url)}
+                  src={mediaUrl(product.image?.url)}
                   alt={product.title}
                   className="w-full h-52 object-cover"
                 />
@@ -66,7 +67,7 @@ export default function ProductPreview({ products }: ProductPreviewProps) {
 
                 <div className="mb-6">
                   <ul className="space-y-3">
-                    {product.curriculum.items.slice(0, 2).map((item: string, i: number) => (
+                    {product.curriculum.items.slice(0, 2).map((item, i) => (
                       <li
                         key={i}
                         className="flex items-center text-sm text-gray-700 font-medium"
