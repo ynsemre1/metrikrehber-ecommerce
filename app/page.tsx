@@ -12,27 +12,25 @@ import { fetchProducts } from "@/lib/strapi";
 export default async function HomePage() {
   const { data } = await fetchProducts({ populate: "*" });
 
-  const products = data.map((item: { id: number; attributes: any }) => {
-    const p = item.attributes || {};
-
+  const products = data.map((item: any) => {
     return {
       id: item.id,
-      title: p.title || "Başlıksız Ürün",
-      image: p.images?.[0] || { url: "" },
-      originalPrice: p.originalPrice ?? 39999,
-      discountedPrice: p.price ?? 24999,
-      successRate: p.successRate ?? "98%",
+      title: item.title || "Başlıksız Ürün",
+      image: item.images?.[0] || { url: "" },
+      originalPrice: item.originalPrice ?? item.price + 10000,
+      discountedPrice: item.price ?? 0,
+      successRate: item.successRate ?? "98%",
       curriculum: {
-        title: p.curriculum?.title ?? "Müfredat Bilgisi Yok",
-        items: p.curriculum?.items ?? ["İçerik bulunamadı"],
+        title: item.curriculum?.title ?? "Müfredat Bilgisi Yok",
+        items: item.curriculum?.items ?? ["İçerik bulunamadı"],
       },
       features: {
-        title: p.features?.title ?? "Özellik Yok",
-        items: p.features?.items ?? ["Hiçbir özellik belirtilmedi"],
+        title: item.features?.title ?? "Özellik Yok",
+        items: item.features?.items ?? ["Hiçbir özellik belirtilmedi"],
       },
       additionalFeatures: {
-        title: p.additionalFeatures?.title ?? "Ek Özellik Yok",
-        items: p.additionalFeatures?.items ?? [
+        title: item.additionalFeatures?.title ?? "Ek Özellik Yok",
+        items: item.additionalFeatures?.items ?? [
           {
             name: "Belirtilmemiş",
             details: ["Detay yok"],
