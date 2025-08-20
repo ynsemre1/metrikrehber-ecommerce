@@ -1,7 +1,7 @@
 import ProductCard from "./ProductCard"
 
 interface ProductGridProps {
-  products: any[] // Tipini istersen genişlet
+  products: any[]
 }
 
 export default function ProductGrid({ products }: ProductGridProps) {
