@@ -1,31 +1,4 @@
-// lib/strapi.ts
-
-import qs from "qs";
-import { Product } from "@/types/product"; 
-export function mediaUrl(url?: string) {
-  return url?.startsWith("/") ? `https://metrik-api.onrender.com${url}` : url;
-}
-
-export async function fetchProducts(params?: Record<string, any>) {
-  const query = qs.stringify(params || {}, { encodeValuesOnly: true });
-  const res = await fetch(`https://metrik-api.onrender.com/api/products?${query}`);
-  const json = await res.json();
-
-  return {
-    data: json.data.map(normalizeProduct),
-  };
-}
-
-export async function fetchProductBySlug(slug: string) {
-  const { data } = await fetchProducts({
-    filters: {
-      slug: { $eq: slug },
-    },
-    populate: "*",
-  });
-
-  return data[0]; 
-}
+import { Product } from "@/types/product";
 
 function parsePrice(input: any): number {
   if (!input) return 0;
@@ -37,9 +10,8 @@ export function normalizeProduct(item: any): Product {
   const p = item;
 
   const descriptionLines = (p.description || "").split("\n").filter(Boolean);
-
-  const curriculumItems = descriptionLines.slice(0, 5); 
-  const featureItems = descriptionLines.slice(5); 
+  const curriculumItems = descriptionLines.slice(0, 5);
+  const featureItems = descriptionLines.slice(5);
 
   return {
     id: p.id,
@@ -51,7 +23,6 @@ export function normalizeProduct(item: any): Product {
     successRate: "98%",
     installmentInfo: "Taksitli Ödeme",
     advancePayment: "Peşinat Yok",
-
     curriculum: {
       title: "Bu Pakette Neler Var?",
       items: curriculumItems.length ? curriculumItems : ["İçerik bulunamadı"],

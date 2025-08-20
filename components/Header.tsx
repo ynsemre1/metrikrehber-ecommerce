@@ -101,13 +101,15 @@ export default function Header() {
 
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center space-x-4">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="font-semibold hover:bg-purple-50 hover:text-purple-600 transition-all duration-300"
-              >
-                Giriş Yap
-              </Button>
+              <Link href="/login">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="font-semibold hover:bg-purple-50 hover:text-purple-600 transition-all duration-300"
+                >
+                  Giriş Yap
+                </Button>
+              </Link>
               <Button
                 size="sm"
                 className="gradient-primary hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/25 font-semibold"
@@ -149,12 +151,15 @@ export default function Header() {
                   </Link>
                 ))}
                 <div className="px-4 pt-4 space-y-3">
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start font-semibold"
-                  >
-                    Giriş Yap
-                  </Button>
+                  <Link href="/login">
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start font-semibold"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Giriş Yap
+                    </Button>
+                  </Link>
                   <Button className="w-full gradient-primary font-semibold">
                     Başlayın
                   </Button>
