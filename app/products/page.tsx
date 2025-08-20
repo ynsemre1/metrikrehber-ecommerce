@@ -13,12 +13,13 @@ const categories = [
   { label: "TEK DERS", slug: "tek-ders" },
 ];
 
-export default async function ProductsPage({
-  searchParams,
-}: {
-  searchParams?: { category?: string };
-}) {
-  const categorySlug = searchParams?.category;
+type Props = {
+  searchParams: Promise<{ category?: string }>;
+};
+
+export default async function ProductsPage(props: Props) {
+  const { category } = await props.searchParams;
+  const categorySlug = typeof category === "string" ? category : undefined;
 
   const filters = categorySlug
     ? { category: { UID: { $eq: categorySlug } } }
@@ -38,7 +39,6 @@ export default async function ProductsPage({
           : "Tüm Ürünler"}
       </h1>
 
-      {/* Filtre Butonları */}
       <div className="flex flex-wrap justify-center gap-4 mb-16">
         {categories.map((cat) => (
           <Link
@@ -55,7 +55,6 @@ export default async function ProductsPage({
         ))}
       </div>
 
-      {/* Ürünler */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
