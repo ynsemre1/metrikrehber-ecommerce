@@ -11,8 +11,6 @@ export async function loginUser(identifier: string, password: string) {
   return data;
 }
 
-const token = localStorage.getItem("token");
-
 export async function getUserWithPackages(token: string) {
   const res = await fetch("https://metrik-api.onrender.com/api/users/me?populate=packages", {
     headers: {
