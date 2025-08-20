@@ -28,25 +28,40 @@ export async function fetchProductBySlug(slug: string) {
   return data[0]; // normalize edilmiş halde gelir
 }
 
+function parsePrice(input: any): number {
+  if (!input) return 0;
+  if (typeof input === "number") return input;
+  return Number(String(input).replace(/[^\d.-]/g, "")) || 0;
+}
+
 export function normalizeProduct(item: any): Product {
-  const p = item.attributes ?? item;
+  const p = item;
+
+  // 📌 description satır satır parçalanır
+  const descriptionLines = (p.description || "").split("\n").filter(Boolean);
+
+  const curriculumItems = descriptionLines.slice(0, 5); // ilk 5 satır
+  const featureItems = descriptionLines.slice(5); // kalanlar
+
   return {
-    id: item.id,
+    id: p.id,
     slug: p.slug,
     title: p.title || "Başlıksız Ürün",
-    image: p.images?.data?.[0]?.attributes || { url: "" },
-    discountedPrice: Number(String(p.price).replace(",", "")) || 0,
-    originalPrice: Number(String(p.price).replace(",", "")) + 1000 || 1000,
+    image: p.images?.[0] || { url: "" },
+    discountedPrice: parsePrice(p.price),
+    originalPrice: parsePrice(p.originalPrice) || parsePrice(p.price) + 1000,
     successRate: "98%",
     installmentInfo: "Taksitli Ödeme",
     advancePayment: "Peşinat Yok",
+
+    // 📘 Artık description'dan türetiliyor:
     curriculum: {
-      title: "Müfredat Bilgisi Yok",
-      items: ["İçerik bulunamadı"],
+      title: "Bu Pakette Neler Var?",
+      items: curriculumItems.length ? curriculumItems : ["İçerik bulunamadı"],
     },
     features: {
-      title: "Özellik Yok",
-      items: ["Hiçbir özellik belirtilmedi"],
+      title: "Öne Çıkan Özellikler",
+      items: featureItems.length ? featureItems : ["Hiçbir özellik belirtilmedi"],
     },
     additionalFeatures: {
       title: "Ek Özellik Yok",
