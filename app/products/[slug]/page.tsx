@@ -5,13 +5,12 @@ import { fetchProductBySlug } from "@/lib/strapi";
 import ProductDetail from "@/components/ProductDetail";
 import { Product } from "@/types/product";
 
-export default async function Page(props: {
-  params: {
-    slug: string;
-  };
-}) {
-  const slug = props.params.slug;
+type Props = {
+  params: Promise<{ slug: string }>;
+};
 
+export default async function Page({ params }: Props) {
+  const { slug } = await params;
   const product: Product | undefined = await fetchProductBySlug(slug);
 
   if (!product) {
