@@ -41,81 +41,89 @@ export default function ProductPreview({ products }: ProductPreviewProps) {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {featuredProducts.map((product, index) => (
-            <div
-              key={product.id}
-              className="group bg-white rounded-3xl shadow-xl border border-purple-100 overflow-hidden hover-lift transition-all duration-500"
-              style={{ animationDelay: `${index * 200}ms` }}
-            >
-              {/* Product Image */}
-              <div className="relative overflow-hidden">
-                <img
-                  src={mediaUrl(product.image?.url) || "/placeholder.svg"}
-                  alt={product.title}
-                  className="w-full h-52 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                <div className="absolute top-4 left-4">
-                  <span className="bg-gradient-to-r from-purple-500 to-green-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                    {product.successRate}
-                  </span>
+          {featuredProducts.map((product, index) => {
+            const imageUrl =
+              mediaUrl(
+                product.images?.[0]?.formats?.medium?.url ||
+                  product.images?.[0]?.url
+              ) || "/placeholder.svg";
+
+            return (
+              <div
+                key={product.id}
+                className="group bg-white rounded-3xl shadow-xl border border-purple-100 overflow-hidden hover-lift transition-all duration-500"
+                style={{ animationDelay: `${index * 200}ms` }}
+              >
+                {/* Product Image */}
+                <div className="relative overflow-hidden">
+                  <img
+                    src={imageUrl}
+                    alt={product.title}
+                    className="w-full h-52 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-gradient-to-r from-purple-500 to-green-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                      %100 Başarı
+                    </span>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <div className="w-10 h-10 bg-orange-400 rounded-full flex items-center justify-center animate-pulse">
+                      <Zap className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
                 </div>
-                <div className="absolute top-4 right-4">
-                  <div className="w-10 h-10 bg-orange-400 rounded-full flex items-center justify-center animate-pulse">
-                    <Zap className="w-5 h-5 text-white" />
+
+                {/* Product Content */}
+                <div className="p-8">
+                  <h3 className="text-xl font-bold font-poppins text-gray-900 mb-6 line-clamp-2 group-hover:text-purple-600 transition-colors duration-300">
+                    {product.title}
+                  </h3>
+
+                  {/* Key Features */}
+                  <div className="mb-6">
+                    <ul className="space-y-3">
+                      {["Canlı Dersler", "Video İçerikler"].map(
+                        (item: string, i: number) => (
+                          <li
+                            key={i}
+                            className="flex items-center text-sm text-gray-700 font-medium"
+                          >
+                            <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                              <Check className="w-3 h-3 text-green-600" />
+                            </div>
+                            {item}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+
+                  {/* Pricing */}
+                  <div className="border-t border-gray-100 pt-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-lg text-gray-400 line-through font-medium">
+                        {formatPrice(product.price + 10000)} TL
+                      </span>
+                      <span className="text-3xl font-bold text-gradient font-poppins">
+                        {formatPrice(product.price)} TL
+                      </span>
+                    </div>
+
+                    <div className="text-center mb-6">
+                      <span className="bg-gradient-to-r from-orange-100 to-orange-200 text-orange-800 px-3 py-1 rounded-full text-sm font-semibold">
+                        Taksit Seçenekleri Mevcut
+                      </span>
+                    </div>
+
+                    <Button className="w-full gradient-primary hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/25 font-bold py-3 rounded-xl">
+                      Detayları Görüntüle
+                    </Button>
                   </div>
                 </div>
               </div>
-
-              {/* Product Content */}
-              <div className="p-8">
-                <h3 className="text-xl font-bold font-poppins text-gray-900 mb-6 line-clamp-2 group-hover:text-purple-600 transition-colors duration-300">
-                  {product.title}
-                </h3>
-
-                {/* Key Features */}
-                <div className="mb-6">
-                  <ul className="space-y-3">
-                    {product.curriculum?.items
-                      ?.slice(0, 2)
-                      .map((item: string, index: number) => (
-                        <li
-                          key={index}
-                          className="flex items-center text-sm text-gray-700 font-medium"
-                        >
-                          <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                            <Check className="w-3 h-3 text-green-600" />
-                          </div>
-                          {item}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-
-                {/* Pricing */}
-                <div className="border-t border-gray-100 pt-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-lg text-gray-400 line-through font-medium">
-                      {formatPrice(product.originalPrice)} TL
-                    </span>
-                    <span className="text-3xl font-bold text-gradient font-poppins">
-                      {formatPrice(product.discountedPrice)} TL
-                    </span>
-                  </div>
-
-                  <div className="text-center mb-6">
-                    <span className="bg-gradient-to-r from-orange-100 to-orange-200 text-orange-800 px-3 py-1 rounded-full text-sm font-semibold">
-                      {product.installmentInfo}
-                    </span>
-                  </div>
-
-                  <Button className="w-full gradient-primary hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/25 font-bold py-3 rounded-xl">
-                    Detayları Görüntüle
-                  </Button>
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* See All Products Button */}
