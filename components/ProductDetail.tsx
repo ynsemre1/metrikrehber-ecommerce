@@ -1,34 +1,34 @@
 // components/ProductDetail.tsx
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Star, Users, Clock, Award } from "lucide-react"
-import Image from "next/image"
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Star, Users, Clock, Award } from "lucide-react";
+import Image from "next/image";
 
 interface ProductDetailProps {
   product: {
-    id: number
-    title: string
-    slug: string
+    id: number;
+    title: string;
+    slug: string;
     category: {
-      title: string
-    }
-    description: string
-    price: number
+      title: string;
+    };
+    description: string;
+    price: number;
     images: {
-      url: string
+      url: string;
       formats?: {
-        medium?: { url: string }
-        large?: { url: string }
-      }
-    }[]
-  }
+        medium?: { url: string };
+        large?: { url: string };
+      };
+    }[];
+  };
 }
 
 export default function ProductDetail({ product }: ProductDetailProps) {
   const fullImageUrl = (path: string) =>
-    path.startsWith("http") ? path : `https://metrik-api.onrender.com${path}`
+    path.startsWith("http") ? path : `https://metrik-api.onrender.com${path}`;
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10 space-y-10">
@@ -43,21 +43,19 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         {/* Resimler */}
         <div className="space-y-4">
           {product.images.map((img, i) => {
-            const path =
-              img.formats?.medium?.url ||
-              img.formats?.large?.url ||
-              img.url
-              console.log("📸 image debug:", product.images)
+            const path = img.url;
             return (
-              <div key={i} className="relative aspect-square rounded-xl overflow-hidden border">
-                <Image
-                  src={fullImageUrl(path)}
+              <div
+                key={i}
+                className="relative aspect-square rounded-xl overflow-hidden border"
+              >
+                <img
+                  src={`https://metrik-api.onrender.com${path}`}
                   alt={product.title}
-                  fill
-                  className="object-cover"
+                  className="object-cover w-full h-full"
                 />
               </div>
-            )
+            );
           })}
         </div>
 
@@ -111,5 +109,5 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         </p>
       </div>
     </div>
-  )
+  );
 }
