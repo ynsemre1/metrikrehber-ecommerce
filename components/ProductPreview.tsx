@@ -9,8 +9,10 @@ interface ProductPreviewProps {
 }
 
 export default function ProductPreview({ products }: ProductPreviewProps) {
-  const featuredProducts = products.slice(0, 3);
-
+  const featuredProducts = [...products]
+    .sort((a, b) => b.id - a.id)
+    .slice(0, 4);
+    
   return (
     <section className="py-24 bg-gradient-to-br from-white via-purple-50/30 to-green-50/30 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
