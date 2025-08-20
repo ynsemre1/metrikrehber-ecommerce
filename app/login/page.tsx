@@ -15,7 +15,7 @@ export default function LoginPage() {
     setError("");
 
     const data = await loginUser(identifier, password);
-
+    console.log(data);
     if (data.jwt) {
       localStorage.setItem("token", data.jwt);
       localStorage.setItem("user", JSON.stringify(data.user));
