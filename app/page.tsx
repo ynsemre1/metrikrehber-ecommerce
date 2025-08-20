@@ -13,28 +13,29 @@ export default async function HomePage() {
   const { data } = await fetchProducts({ populate: "*" });
 
   const products = data.map((item: { id: number; attributes: any }) => {
-    const p = item.attributes;
+    const p = item.attributes || {};
+
     return {
       id: item.id,
-      title: p.title,
+      title: p.title || "Başlıksız Ürün",
       image: p.images?.[0] || { url: "" },
       originalPrice: p.originalPrice ?? 39999,
       discountedPrice: p.price ?? 24999,
       successRate: p.successRate ?? "98%",
-      curriculum: p.curriculum ?? {
-        title: "Kapsamlı Müfredat",
-        items: ["TYT Matematik", "AYT Fizik", "Geometri"],
+      curriculum: {
+        title: p.curriculum?.title ?? "Müfredat Bilgisi Yok",
+        items: p.curriculum?.items ?? ["İçerik bulunamadı"],
       },
-      features: p.features ?? {
-        title: "Öne Çıkan Özellikler",
-        items: ["Tablet Desteği", "Video İçerikler"],
+      features: {
+        title: p.features?.title ?? "Özellik Yok",
+        items: p.features?.items ?? ["Hiçbir özellik belirtilmedi"],
       },
-      additionalFeatures: p.additionalFeatures ?? {
-        title: "Ekstra İçerikler",
-        items: [
+      additionalFeatures: {
+        title: p.additionalFeatures?.title ?? "Ek Özellik Yok",
+        items: p.additionalFeatures?.items ?? [
           {
-            name: "Bonus Modül",
-            details: ["Motivasyon Videoları", "Rehberlik"],
+            name: "Belirtilmemiş",
+            details: ["Detay yok"],
           },
         ],
       },
