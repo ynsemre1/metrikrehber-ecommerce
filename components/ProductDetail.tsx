@@ -47,7 +47,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               img.formats?.medium?.url ||
               img.formats?.large?.url ||
               img.url
-
+              console.log("📸 image debug:", product.images)
             return (
               <div key={i} className="relative aspect-square rounded-xl overflow-hidden border">
                 <Image
