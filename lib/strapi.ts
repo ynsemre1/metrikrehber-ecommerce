@@ -30,7 +30,6 @@ export async function fetchProductBySlug(slug: string) {
 
 export function normalizeProduct(item: any): Product {
   const p = item.attributes ?? item;
-
   return {
     id: item.id,
     slug: p.slug,
