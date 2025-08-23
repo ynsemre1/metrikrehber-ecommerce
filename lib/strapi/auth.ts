@@ -1,14 +1,17 @@
 // lib/strapi/auth.ts
 
 export async function loginUser(identifier: string, password: string) {
-  const res = await fetch("https://metrik-api.onrender.com/api/auth/local", {
+  const r = await fetch("/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ identifier, password }),
+    credentials: "include", // cookie tarayıcıda yazılsın
   });
+  return r.json();
+}
 
-  const data = await res.json();
-  return data;
+export async function logoutUser() {
+  await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
 }
 
 export async function getUserWithPackages(token: string) {

@@ -1,34 +1,23 @@
-"use client";
+// app/dashboard/page.tsx
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { getUserWithPackages } from "@/lib/strapi/auth";
+async function getMe() {
+  const token = (await cookies()).get("token")?.value;
+  if (!token) return null;
 
-export default function DashboardPage() {
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  const r = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/me?populate=packages`, {
+    headers: { Authorization: `Bearer ${token}` },
+    cache: "no-store",
+  });
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    console.log("Token:", token);
-    if (!token) {
-      router.push("/login");
-      return;
-    }
+  if (!r.ok) return null;
+  return r.json();
+}
 
-    getUserWithPackages(token)
-      .then(setUser)
-      .catch(() => {
-        localStorage.removeItem("token");
-        router.push("/login");
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) return <div className="p-8">Yükleniyor...</div>;
-
-  if (!user) return null;
+export default async function DashboardPage() {
+  const user = await getMe();
+  if (!user) redirect("/login");
 
   return (
     <div className="p-8">
