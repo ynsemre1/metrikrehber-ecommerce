@@ -1,7 +1,7 @@
 // app/api/auth/login/route.ts
 import { NextResponse } from "next/server";
 
-const API = process.env.NEXT_PUBLIC_API_URL; // https://metrik-api.onrender.com
+const API = process.env.NEXT_PUBLIC_API_URL!; // https://metrik-api.onrender.com
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -17,25 +17,14 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: data?.error || { message: "Login failed" } }, { status: r.status });
   }
 
+  // JWT'yi httpOnly cookie olarak yaz (domain belirtmiyoruz!)
   const res = NextResponse.json({ user: data.user });
-
-  const url = new URL(req.url);
-  const host = url.hostname; // örn: www.metrikrehber.com veya metrikrehber-ecommerce-xxx.vercel.app
-  const isProd = process.env.NODE_ENV === "production";
-
-  // Sadece prod ana domain’de cookie domain’i ayarla
-  const cookieDomain =
-    isProd && (host === "metrikrehber.com" || host.endsWith(".metrikrehber.com"))
-      ? ".metrikrehber.com"
-      : undefined;
-
   res.cookies.set("token", data.jwt, {
     httpOnly: true,
-    secure: isProd,
+    secure: true,      // vercel.app https olduğu için OK
     sameSite: "lax",
     path: "/",
-    ...(cookieDomain ? { domain: cookieDomain } : {}),
-    maxAge: 60 * 60 * 24 * 7, // 7 gün
+    maxAge: 60 * 60 * 24 * 7,
   });
 
   return res;
