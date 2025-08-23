@@ -1,9 +1,8 @@
 // app/api/auth/login/route.ts
-export const runtime = "nodejs";          // Edge'e gitmesin
-export const dynamic = "force-dynamic";   // cache vs. karışmasın
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
-
 const API = process.env.NEXT_PUBLIC_API_URL!; // https://metrik-api.onrender.com
 
 export async function POST(req: Request) {
@@ -13,25 +12,21 @@ export async function POST(req: Request) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
-    // server-to-server, credentials'a gerek yok
   });
 
   const data = await r.json();
-
   if (!r.ok) {
     return NextResponse.json({ error: data?.error || { message: "Login failed" } }, { status: r.status });
   }
 
-  // JWT'yi httpOnly cookie olarak YAZ
+  // Strapi'nin döndürdüğü jwt'yi HttpOnly cookie'ye yaz
   const res = NextResponse.json({ user: data.user });
-  // !!! DOMAIN BELİRTME → çağrılan host'a yazılsın (preview, www, vs.)
   res.cookies.set("token", data.jwt, {
     httpOnly: true,
-    secure: true,      // vercel.app ve www https
+    secure: true,      // vercel.app & prod https
     sameSite: "lax",
     path: "/",
     maxAge: 60 * 60 * 24 * 7,
   });
-
   return res;
 }
