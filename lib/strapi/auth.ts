@@ -1,11 +1,12 @@
 // lib/strapi/auth.ts
 
 // lib/strapi/auth.ts
+// lib/strapi/auth.ts
 export async function loginUser(identifier: string, password: string) {
   const r = await fetch("/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    credentials: "include", // <-- ŞART
+    credentials: "include", // 🔴 ŞART
     body: JSON.stringify({ identifier, password }),
   });
   return r.json();
