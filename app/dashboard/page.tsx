@@ -1,9 +1,13 @@
-// app/dashboard/page.tsx
+// app/dashboard/page.tsx  (🚫 "use client" yok)
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 async function getMe() {
-  const token = (await cookies()).get("token")?.value;
+  const cookieStore = await cookies(); // Next 15: async
+  const token = cookieStore.get("token")?.value;
   if (!token) return null;
 
   const r = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/me?populate=packages`, {
@@ -22,7 +26,6 @@ export default async function DashboardPage() {
   return (
     <div className="p-8">
       <h1 className="text-2xl font-bold mb-4">Merhaba, {user.username} 👋</h1>
-
       <div className="mt-6">
         <h2 className="text-xl font-semibold mb-2">Aldığın Paketler</h2>
         {user.packages?.length ? (

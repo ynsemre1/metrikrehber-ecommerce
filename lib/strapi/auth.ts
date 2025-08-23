@@ -4,8 +4,8 @@ export async function loginUser(identifier: string, password: string) {
   const r = await fetch("/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
     body: JSON.stringify({ identifier, password }),
-    credentials: "include", // cookie tarayıcıda yazılsın
   });
   return r.json();
 }
