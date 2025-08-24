@@ -1,6 +1,6 @@
 import { Check, Star, Zap, Target, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { mediaUrl } from "@/lib/strapi";
+import { mediaUrl } from "@/lib/strapi/media";
 import { Product } from "@/types/product";
 import Link from "next/link";
 
