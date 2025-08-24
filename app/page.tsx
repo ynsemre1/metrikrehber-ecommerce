@@ -15,10 +15,8 @@ import { toProducts } from "@/lib/strapi/adapter";
 import type { Product } from "@/types/product";
 
 export default async function HomePage() {
-  // Strapi'den ham listeyi çek
   const { data } = await fetchProducts<any>({ populate: "*" });
 
-  // Ham veriyi UI'nin beklediği Product tipine normalize et
   const products: Product[] = toProducts(data);
 
   return (
