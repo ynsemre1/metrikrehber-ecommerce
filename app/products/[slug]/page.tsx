@@ -1,7 +1,7 @@
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-import { fetchProductBySlug } from "@/lib/strapi";
+import { fetchProductBySlug } from "@/lib/strapi/product";
 import ProductDetail from "@/components/ProductDetail";
 import { Product } from "@/types/product";
 
@@ -11,7 +11,8 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
-  const product: Product | undefined = await fetchProductBySlug(slug);
+
+  const { data: product } = await fetchProductBySlug<Product>(slug, '*');
 
   if (!product) {
     return (

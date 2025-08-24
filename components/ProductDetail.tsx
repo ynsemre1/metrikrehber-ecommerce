@@ -1,5 +1,5 @@
 import { Product } from "@/types/product";
-import { mediaUrl } from "@/lib/strapi";
+import { mediaUrl } from "@/lib/strapi/media";
 import { Check, Sparkles, Zap, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 

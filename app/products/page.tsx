@@ -1,7 +1,7 @@
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-import { fetchProducts } from "@/lib/strapi";
+import { fetchProducts } from "@/lib/strapi/product";
 import { Product } from "@/types/product";
 import ProductCard from "@/components/ProductCard";
 import Link from "next/link";
