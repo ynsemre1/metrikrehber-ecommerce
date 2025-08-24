@@ -1,63 +1,49 @@
-"use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { loginUser } from "@/lib/strapi/auth";
+'use client';
+import { useState } from 'react';
 
 export default function LoginPage() {
-  const [identifier, setIdentifier] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const router = useRouter();
+  const [identifier, setIdentifier] = useState('');
+  const [password, setPassword] = useState('');
+  const [err, setErr] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setError("");
-
-    const data = await loginUser(identifier, password);
-    console.log(data);
-    if (data.user) {
-      router.push("/dashboard");
-    } else {
-      setError(data.error?.message || "Giriş başarısız");
+    setErr(null);
+    setLoading(true);
+    try {
+      const r = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ identifier, password }),
+      });
+      if (!r.ok) {
+        const jj = await r.json().catch(() => ({}));
+        throw new Error(jj?.error || 'Login failed');
+      }
+      window.location.href = '/dashboard';
+    } catch (e: any) {
+      setErr(e.message);
+    } finally {
+      setLoading(false);
     }
-  };
+  }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-50">
-      <form
-        onSubmit={handleLogin}
-        className="bg-white p-8 rounded shadow-md w-full max-w-md"
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center">Giriş Yap</h2>
-
-        {error && <p className="text-red-600 text-sm mb-4">{error}</p>}
-
-        <input
-          type="email"
-          value={identifier}
-          onChange={(e) => setIdentifier(e.target.value)}
-          placeholder="E-posta"
-          required
-          className="w-full p-3 border border-gray-300 rounded mb-4"
-        />
-
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Şifre"
-          required
-          className="w-full p-3 border border-gray-300 rounded mb-4"
-        />
-
-        <button
-          type="submit"
-          className="w-full bg-black text-white py-3 rounded hover:bg-gray-800 transition"
-        >
-          Giriş Yap
+    <div className="max-w-sm mx-auto py-20">
+      <h1 className="text-2xl font-semibold mb-6">Giriş Yap</h1>
+      <form onSubmit={onSubmit} className="space-y-3">
+        <input className="w-full rounded border px-3 py-2"
+               type="email" placeholder="Email"
+               value={identifier} onChange={e=>setIdentifier(e.target.value)} required />
+        <input className="w-full rounded border px-3 py-2"
+               type="password" placeholder="Şifre"
+               value={password} onChange={e=>setPassword(e.target.value)} required />
+        {err && <p className="text-red-600 text-sm">{err}</p>}
+        <button disabled={loading} className="w-full rounded bg-black text-white py-2 disabled:opacity-50">
+          {loading ? 'Giriş yapılıyor…' : 'Giriş yap'}
         </button>
       </form>
-    </main>
+    </div>
   );
 }

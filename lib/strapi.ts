@@ -1,73 +1,42 @@
 // lib/strapi.ts
+import 'server-only';
+import { cookies } from 'next/headers';
 
-import qs from "qs";
-import { Product } from "@/types/product"; 
-export function mediaUrl(url?: string) {
-  return url?.startsWith("/") ? `https://metrik-api.onrender.com${url}` : url;
+const STRAPI =
+  process.env.STRAPI_URL ??
+  process.env.NEXT_PUBLIC_API_URL ??
+  'http://localhost:1337';
+
+const AUTH_COOKIE = process.env.AUTH_COOKIE_NAME || 'mr.jwt';
+
+type Json = Record<string, any>;
+
+async function authHeaders(init?: RequestInit) {
+  const jar = await cookies(); // Next 15
+  const token = jar.get(AUTH_COOKIE)?.value;
+  const headers = new Headers(init?.headers || {});
+  headers.set('Content-Type', 'application/json');
+  if (token) headers.set('Authorization', `Bearer ${token}`);
+  return headers;
 }
 
-export async function fetchProducts(params?: Record<string, any>) {
-  const query = qs.stringify(params || {}, { encodeValuesOnly: true });
-  const res = await fetch(`https://metrik-api.onrender.com/api/products?${query}`);
-  const json = await res.json();
-
-  return {
-    data: json.data.map(normalizeProduct),
-  };
+export async function strapiFetch<T extends Json = Json>(
+  path: string,
+  init: RequestInit = {}
+): Promise<T> {
+  if (!path.startsWith('/')) path = `/${path}`;
+  const headers = await authHeaders(init);
+  const res = await fetch(`${STRAPI}${path}`, { ...init, headers, cache: 'no-store' });
+  if (!res.ok) {
+    let details: any = null;
+    try { details = await res.json(); } catch {}
+    const msg = details?.error?.message || details?.message || `Strapi error ${res.status}`;
+    throw new Error(msg);
+  }
+  if (res.status === 204) return {} as T;
+  return res.json() as Promise<T>;
 }
 
-export async function fetchProductBySlug(slug: string) {
-  const { data } = await fetchProducts({
-    filters: {
-      slug: { $eq: slug },
-    },
-    populate: "*",
-  });
-
-  return data[0]; 
-}
-
-function parsePrice(input: any): number {
-  if (!input) return 0;
-  if (typeof input === "number") return input;
-  return Number(String(input).replace(/[^\d.-]/g, "")) || 0;
-}
-
-export function normalizeProduct(item: any): Product {
-  const p = item;
-
-  const descriptionLines = (p.description || "").split("\n").filter(Boolean);
-
-  const curriculumItems = descriptionLines.slice(0, 5); 
-  const featureItems = descriptionLines.slice(5); 
-
-  return {
-    id: p.id,
-    slug: p.slug,
-    title: p.title || "Başlıksız Ürün",
-    image: p.images?.[0] || { url: "" },
-    discountedPrice: parsePrice(p.price),
-    originalPrice: parsePrice(p.originalPrice) || parsePrice(p.price) + 1000,
-    successRate: "98%",
-    installmentInfo: "Taksitli Ödeme",
-    advancePayment: "Peşinat Yok",
-
-    curriculum: {
-      title: "Bu Pakette Neler Var?",
-      items: curriculumItems.length ? curriculumItems : ["İçerik bulunamadı"],
-    },
-    features: {
-      title: "Öne Çıkan Özellikler",
-      items: featureItems.length ? featureItems : ["Hiçbir özellik belirtilmedi"],
-    },
-    additionalFeatures: {
-      title: "Ek Özellik Yok",
-      items: [
-        {
-          name: "Belirtilmemiş",
-          details: ["Detay yok"],
-        },
-      ],
-    },
-  };
+export async function getMe<T extends Json = Json>() {
+  return strapiFetch<T>('/api/users/me?populate=*');
 }
